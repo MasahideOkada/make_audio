@@ -1,4 +1,3 @@
-from cmath import sin
 import math
 import numpy as np
 from scipy.io.wavfile import write
@@ -10,7 +9,7 @@ note_names = [
 
 def write_note(noteid, A4_freq=440, octave=0, duration=1.0, samplerate=44100,
                fade_in=True, fade_out=True,
-               fade_in_attack=0.1, fade_out_attack=0.1):
+               fade_in_attack=0.1, fade_out_attack=0.07):
     distance_from_A = noteid - 9
     note_freq = A4_freq * math.pow(2, distance_from_A / 12) * math.pow(2, octave)
     time_array = np.arange(samplerate * duration)
@@ -25,6 +24,8 @@ def write_note(noteid, A4_freq=440, octave=0, duration=1.0, samplerate=44100,
     file_name = f'notes/wav/{notename}{4+octave}inA{A4_freq}.wav'
     write(file_name, samplerate, sinwave)
 
-duration = 0.8
+duration = 0.7
 A4_freq = 440 
-write_note(9, duration=duration)
+for octave in range(-2, 3):
+    for noteid in range(12):
+        write_note(noteid, octave=octave, duration=duration)
