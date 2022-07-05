@@ -1,6 +1,3 @@
-import imp
-
-
 import numpy as np
 
 def exp_fade_in(inputwave, attack=1.0, samplerate=44100.0):
